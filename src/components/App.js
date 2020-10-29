@@ -1,5 +1,6 @@
 import React from 'react';
 import swapiservice from '../api/swapisevice';
+import PlanetList from '../components/PlanetList';
 
 class App extends React.Component {
     state = {
@@ -14,12 +15,16 @@ class App extends React.Component {
         const response = await swapiservice.get('/planets');
          this.setState({
              planets: response.data.results
-         })
-         console.log(this.state.planets)
+         });
+         console.log(response.data.results);
     }
 
     render() {
-        return <div>App</div>
+        return (
+            <div>
+                <PlanetList planets={this.state.planets}/>
+            </div>
+        )
     }
 }
 
