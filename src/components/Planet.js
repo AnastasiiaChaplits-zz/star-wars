@@ -2,7 +2,7 @@ import React from 'react';
 
 const Planet = ({planet}) => {
     return (
-        <div className="ui card">
+        <div className="card">
             <div className="content">
                 <div className="header">{planet.name}</div>
                 <div className="meta">

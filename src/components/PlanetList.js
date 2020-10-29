@@ -7,7 +7,7 @@ const PlanetList = ({planets}) => {
         return <Planet planet={planet} key={planet.name} />
     })
     
-    return <div>{renderedList}</div>
+    return <div className="ui link five cards">{renderedList}</div>
 };
 
 export default PlanetList;
