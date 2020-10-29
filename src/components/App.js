@@ -16,7 +16,7 @@ class App extends React.Component {
          this.setState({
              planets: response.data.results
          });
-         console.log(response.data.results);
+         console.log(response);
     }
 
     render() {
