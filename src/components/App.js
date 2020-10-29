@@ -1,6 +1,9 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
 import swapiservice from '../api/swapisevice';
 import PlanetList from '../components/PlanetList';
+import Header from './Header';
 
 class App extends React.Component {
     state = {
@@ -22,7 +25,16 @@ class App extends React.Component {
     render() {
         return (
             <div className="ui container">
-                <PlanetList planets={this.state.planets}/>
+                <Router>
+                    <div>
+                        <Header />
+                        <Route path='/' exact
+                            render={() => (
+                                <PlanetList planets={this.state.planets}/>
+                            )} />
+                        <Route path="/planet/:id" exact />
+                    </div>
+                </Router>            
             </div>
         )
     }
