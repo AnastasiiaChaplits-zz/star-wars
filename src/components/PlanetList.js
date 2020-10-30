@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PlanetList = ({ planets, onPlanetSelect }) => {
-
     const renderedList = planets.map(planet => {
         return (
-            <div className="card" key={planet.name}>
+            <div className="card" key={planet.name} onClick={() => onPlanetSelect(planet)}>
                 <Link to={`/planet/${planet.name}`} className="content">
                     <div className="header">{planet.name}</div>
                     <div className="meta">

@@ -1,10 +1,19 @@
 import React from 'react';
 
 const PlanetDetails = (props) => {
-    console.log(props)
+    if (!props.planet) {
+        return <div>Loading...</div>
+    }
+    const {name, rotation_period, diameter, climat, gravity, terrain, population, residents} = props.planet;
     return (
         <div>
-            Planet Details
+            <p>{name}</p>
+            <p>{rotation_period}</p>
+            <p>{diameter}</p>
+            <p>{climat}</p>
+            <p>{gravity}</p>
+            <p>{terrain}</p>
+            <p>{population}</p>
         </div>
     )
 };

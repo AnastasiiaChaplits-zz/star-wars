@@ -1,10 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
 import swapiservice from '../api/swapisevice';
 import PlanetList from '../components/PlanetList';
 import PlanetDetails from '../components/PlanetDetails';
 import Header from './Header';
+import history from '../history';
 
 class App extends React.Component {
     state = {
@@ -18,33 +19,34 @@ class App extends React.Component {
 
     onGetPlanets = async () => {
         const response = await swapiservice.get('/planets');
-         this.setState({
-             planets: response.data.results,
-             selectedPlanet: response.data.results[0]
-         });
+        this.setState({
+            planets: response.data.results,
+            selectedVideo: response.data.results[0]
+        });
     }
 
     onPlanetSelect = planet => {
-        this.setState({selectedPlanet: planet})
-        console.log(this.state.selectedPlanet)
+        this.setState({ selectedPlanet: planet })
     }
 
     render() {
         return (
             <div className="ui container">
-                <Router>
+                <Router history={history}>
                     <div>
                         <Header />
-                        <Route path='/' exact
-                            render={() => (
-                                <PlanetList planets={this.state.planets} onPlanetSelect={this.onPlanetSelect} />
-                            )} />
-                        <Route path="/planet/:name" exact 
-                            render={() => (
-                                <PlanetDetails planets={this.state.planets} />
-                            )}/>
+                        <Switch>
+                            <Route path='/' exact
+                                render={() => (
+                                    <PlanetList planets={this.state.planets} onPlanetSelect={this.onPlanetSelect} />
+                                )} />
+                            <Route path="/planet/:name" exact
+                                render={() => (
+                                    <PlanetDetails planet={this.state.selectedPlanet} />
+                                )} />
+                        </Switch>
                     </div>
-                </Router>            
+                </Router>
             </div>
         )
     }
