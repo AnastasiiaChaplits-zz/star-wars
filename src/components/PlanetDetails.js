@@ -1,8 +1,12 @@
 import React from 'react';
-import PlanetList from './PlanetList';
 
-const PlanetDetails = () => {
-    return <div>Planet Details</div>
+const PlanetDetails = (props) => {
+    console.log(props)
+    return (
+        <div>
+            Planet Details
+        </div>
+    )
 };
 
 export default PlanetDetails;

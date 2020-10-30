@@ -8,7 +8,8 @@ import Header from './Header';
 
 class App extends React.Component {
     state = {
-        planets: []
+        planets: [],
+        selectedPlanet: null
     }
 
     componentDidMount() {
@@ -18,9 +19,14 @@ class App extends React.Component {
     onGetPlanets = async () => {
         const response = await swapiservice.get('/planets');
          this.setState({
-             planets: response.data.results
+             planets: response.data.results,
+             selectedPlanet: response.data.results[0]
          });
-         console.log(response);
+    }
+
+    onPlanetSelect = planet => {
+        this.setState({selectedPlanet: planet})
+        console.log(this.state.selectedPlanet)
     }
 
     render() {
@@ -31,9 +37,9 @@ class App extends React.Component {
                         <Header />
                         <Route path='/' exact
                             render={() => (
-                                <PlanetList planets={this.state.planets}/>
+                                <PlanetList planets={this.state.planets} onPlanetSelect={this.onPlanetSelect} />
                             )} />
-                        <Route path="/planet/:id" exact 
+                        <Route path="/planet/:name" exact 
                             render={() => (
                                 <PlanetDetails planets={this.state.planets} />
                             )}/>
