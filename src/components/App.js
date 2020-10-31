@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PlanetListContainer from '../containers/PlanetListContainer';
 import PlanetDetailsContainer from '../containers/PlanetDetailsContainer';
 import Header from './Header';
+import ErrorNotification from './ErrorNotification';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                     <Switch>
                         <Route path='/' exact component={PlanetListContainer} />
                         <Route path="/planet/:id" exact component={PlanetDetailsContainer} />
+                        <Route component={ErrorNotification} />
                     </Switch>
                 </div>
             </Router>
