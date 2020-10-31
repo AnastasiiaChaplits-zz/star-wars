@@ -1,14 +1,32 @@
 import React from 'react';
 
+import SwapiService from '../api/swapisevice';
+
 class PlanetDetails extends React.Component {
+    state = {
+        selectedPlanet: null
+    }
 
     componentDidMount() {
         const {id} = this.props.match.params;
-        this.props.onGetPlanet(id);
+        this.onGetPlanet(id);
     };
 
+    swapiService = new SwapiService();
+
+    onGetPlanet = (id) => {
+        this.swapiService
+            .getPlanet(id)
+            .then(this.onLoadedPlanetSuccess)
+    }
+
+    onLoadedPlanetSuccess = (selectedPlanet) => {
+        this.setState({ selectedPlanet })
+    }
+
+
     render() {
-        if (!this.props.planet) {
+        if (!this.state.selectedPlanet) {
             return <div>Loading...</div>
         }
         const {
@@ -19,7 +37,7 @@ class PlanetDetails extends React.Component {
             gravity, 
             terrain, 
             population, 
-            residents} = this.props.planet;
+            residents} = this.state.selectedPlanet;
         return (
             <div>
                 <p>{name}</p>
