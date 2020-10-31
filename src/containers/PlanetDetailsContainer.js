@@ -3,6 +3,7 @@ import React from 'react';
 import SwapiService from '../api/swapisevice';
 import PlanetDetails from '../components/PlanetDetails';
 import ErrorNotification from '../components/ErrorNotification';
+import Spinner from '../components/Spinner';
 
 export default class PlanetDetailsContainer extends React.Component {
     state = {
@@ -39,17 +40,15 @@ export default class PlanetDetailsContainer extends React.Component {
         const {selectedPlanet, error} = this.state;
 
         const errorNotification = error ? <ErrorNotification /> : null;
-        const contentLoaded = !error ? <PlanetDetails planet={selectedPlanet} /> : null;
-
-        if (!selectedPlanet) {
-            return <div>Loading...</div>
-        }
+        const contentLoaded = (!error && selectedPlanet) ? <PlanetDetails planet={selectedPlanet} /> : null;
+        const spinner = !selectedPlanet ? <Spinner /> : null;
 
         return (
-            <div>
+            <>
+                {spinner}
                 {errorNotification}
                 {contentLoaded}
-            </div>
+            </>
         )
     }
 }

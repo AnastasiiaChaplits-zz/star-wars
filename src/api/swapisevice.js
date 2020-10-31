@@ -5,13 +5,14 @@ export default class SwapiService {
         baseURL: 'https://swapi.dev/api/'
     });
 
+
     getPlanets = async () => {
-        const response = await this._swapiservice.get('/planets')
+        const response = await this._swapiservice.get(`/planets`)
             .catch(response => response);
-            if (!response.data.results) {
-                return response;
-            } 
-            return response.data.results
+        if (!response.data.results) {
+            return response;
+        }
+        return response.data.results;
     }
 
     getPlanet = async (id) => {
