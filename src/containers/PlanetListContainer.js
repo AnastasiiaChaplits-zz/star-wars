@@ -1,10 +1,13 @@
 import React from 'react';
+
 import SwapiService from '../api/swapisevice';
 import PlanetList from '../components/PlanetList'
+import ErrorNotification from '../components/ErrorNotification';
 
 export default class PlanetListContainer extends React.Component {
     state = {
-        planets: null
+        planets: [], 
+        error: false
     }
 
     swapiService = new SwapiService();
@@ -17,16 +20,34 @@ export default class PlanetListContainer extends React.Component {
         this.swapiService
             .getPlanets()
             .then(this.onLoadedPlanetsSucccess)
+            .catch(this.onError)
     }
 
     onLoadedPlanetsSucccess = (planets) => {
-        this.setState({ planets })
+        this.setState({ planets, error: false })
+    }
+
+    onError = () => {
+        this.setState({
+            error: true
+        })
     }
 
     render() {
-        if (!this.state.planets) {
+        const {planets, error} = this.state;
+
+        const errorNotification = error ? <ErrorNotification /> : null;
+        const contentLoaded = !error ? <PlanetList planets={planets} /> : null;
+        
+        if (!planets) {
             return <div>Loading...</div>
         }
-        return <PlanetList planets={this.state.planets} />
+
+        return (
+            <div>
+                {errorNotification}
+                {contentLoaded}
+            </div>
+        )
     }
 };

@@ -6,12 +6,20 @@ export default class SwapiService {
     });
 
     getPlanets = async () => {
-        const response = await this._swapiservice.get('/planets');
-        return response.data.results;
+        const response = await this._swapiservice.get('/planets')
+            .catch(response => response);
+            if (!response.data.results) {
+                return response;
+            } 
+            return response.data.results
     }
 
     getPlanet = async (id) => {
-        const response = await this._swapiservice.get(`/planets/${id}`);
+        const response = await this._swapiservice.get(`/planets/${id}`)
+            .catch(response => response);
+        if (!response.data) {
+            return response
+        }
         return response.data;
     }
 }

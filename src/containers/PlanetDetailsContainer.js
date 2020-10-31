@@ -1,11 +1,13 @@
 import React from 'react';
 
 import SwapiService from '../api/swapisevice';
-import PlanetDetails from '../components/PlanetDetails'
+import PlanetDetails from '../components/PlanetDetails';
+import ErrorNotification from '../components/ErrorNotification';
 
 export default class PlanetDetailsContainer extends React.Component {
     state = {
-        selectedPlanet: null
+        selectedPlanet: null,
+        error: false
     }
 
     componentDidMount() {
@@ -19,17 +21,35 @@ export default class PlanetDetailsContainer extends React.Component {
         this.swapiService
             .getPlanet(id)
             .then(this.onLoadedPlanetSuccess)
+            .catch(this.onError)
     }
 
     onLoadedPlanetSuccess = (selectedPlanet) => {
-        this.setState({ selectedPlanet })
+        this.setState({ selectedPlanet, error: false })
+    }
+
+    onError = () => {
+        this.setState({
+            error: true
+        })
     }
 
 
     render() {
-        if (!this.state.selectedPlanet) {
+        const {selectedPlanet, error} = this.state;
+
+        const errorNotification = error ? <ErrorNotification /> : null;
+        const contentLoaded = !error ? <PlanetDetails planet={selectedPlanet} /> : null;
+
+        if (!selectedPlanet) {
             return <div>Loading...</div>
         }
-        return <PlanetDetails planet={this.state.selectedPlanet} />
+
+        return (
+            <div>
+                {errorNotification}
+                {contentLoaded}
+            </div>
+        )
     }
 }
