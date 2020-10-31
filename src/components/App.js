@@ -6,22 +6,20 @@ import PlanetListContainer from '../containers/PlanetListContainer';
 import PlanetDetailsContainer from '../containers/PlanetDetailsContainer';
 import Header from './Header';
 
-class App extends React.Component {
-    render() {
-        return (
-            <div className="ui container">
-                <Router>
-                    <div>
-                        <Header />
-                        <Switch>
-                            <Route path='/' exact component={PlanetListContainer} />
-                            <Route path="/planet/:id" exact component={PlanetDetailsContainer} />
-                        </Switch>
-                    </div>
-                </Router>
-            </div>
-        )
-    }
+const App = () => {
+    return (
+        <div className="ui container">
+            <Router>
+                <div>
+                    <Header />
+                    <Switch>
+                        <Route path='/' exact component={PlanetListContainer} />
+                        <Route path="/planet/:id" exact component={PlanetDetailsContainer} />
+                    </Switch>
+                </div>
+            </Router>
+        </div>
+    )
 }
 
 export default App;

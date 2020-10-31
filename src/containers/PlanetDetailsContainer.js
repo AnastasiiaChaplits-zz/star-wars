@@ -9,7 +9,7 @@ export default class PlanetDetailsContainer extends React.Component {
     }
 
     componentDidMount() {
-        const {id} = this.props.match.params;
+        const { id } = this.props.match.params;
         this.onGetPlanet(id);
     };
 

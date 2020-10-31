@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PlanetList = ({planets}) => {
+const PlanetList = ({ planets }) => {
     const renderedList = planets.map((planet, index) => {
         return (
             <div className="card" key={index + 1}>
