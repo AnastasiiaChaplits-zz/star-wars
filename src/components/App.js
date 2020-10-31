@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
-import PlanetList from '../components/PlanetList';
-import PlanetDetails from '../components/PlanetDetails';
+import PlanetListContainer from '../containers/PlanetListContainer';
+import PlanetDetailsContainer from '../containers/PlanetDetailsContainer';
 import Header from './Header';
 
 class App extends React.Component {
@@ -14,8 +14,8 @@ class App extends React.Component {
                     <div>
                         <Header />
                         <Switch>
-                            <Route path='/' exact component={PlanetList} />
-                            <Route path="/planet/:id" exact component={PlanetDetails} />
+                            <Route path='/' exact component={PlanetListContainer} />
+                            <Route path="/planet/:id" exact component={PlanetDetailsContainer} />
                         </Switch>
                     </div>
                 </Router>
