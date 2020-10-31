@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import {swapiservice} from '../api/swapisevice';
+import SwapiService from '../api/swapisevice';
 import PlanetList from '../components/PlanetList';
 import PlanetDetails from '../components/PlanetDetails';
 import Header from './Header';
@@ -9,26 +9,37 @@ import Header from './Header';
 class App extends React.Component {
     state = {
         planets: [],
-        selectedPlanet: null,
-        selectedPlanetIndex: null
+        selectedPlanet: null
     }
+
+    swapiService = new SwapiService;
 
     componentDidMount() {
         this.onGetPlanets();
     }
 
-    onGetPlanets = async () => {
-        const response = await swapiservice.get('/planets');
-        this.setState({
-            planets: response.data.results,
-            selectedPlanet: response.data.results[0]
-        });
+    onGetPlanets() {
+        this.swapiService
+            .getPlanets()
+            .then(this.onLoadedPlanetsSucccess)
     }
 
-    onPlanetSelect = (planet, index) => {
-        this.setState({ 
-            selectedPlanet: planet,
-            selectedPlanetIndex: index })
+    onLoadedPlanetsSucccess = (planets) => {
+        this.setState({
+            planets: planets
+        })
+    }
+
+    onGetPlanet = (id) => {
+        this.swapiService
+            .getPlanet(id)
+            .then(this.onLoadedPlanetSuccess)
+    }
+
+    onLoadedPlanetSuccess = (selectedPlanet) => {
+        this.setState({
+            selectedPlanet: selectedPlanet
+        })
     }
 
     render() {
@@ -40,11 +51,11 @@ class App extends React.Component {
                         <Switch>
                             <Route path='/' exact
                                 render={() => (
-                                    <PlanetList planets={this.state.planets} onPlanetSelect={this.onPlanetSelect} />
+                                    <PlanetList planets={this.state.planets}/>
                                 )} />
-                            <Route path="/planet/:name" exact
-                                render={() => (
-                                    <PlanetDetails planet={this.state.selectedPlanet} planetIndex={this.state.selectedPlanetIndex}/>
+                            <Route path="/planet/:id" exact
+                                render={(props) => (
+                                    <PlanetDetails planet={this.state.selectedPlanet} onGetPlanet={this.onGetPlanet} {...props} />
                                 )} />
                         </Switch>
                     </div>

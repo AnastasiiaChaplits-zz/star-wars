@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PlanetList = ({ planets, onPlanetSelect }) => {
+const PlanetList = ({ planets }) => {
     const renderedList = planets.map((planet, index) => {
         return (
-            <div className="card" key={index} onClick={() => onPlanetSelect(planet)}>
-                <Link to={`/planet/${index}`} className="content">
+            <div className="card" key={index+1} >
+                <Link to={`/planet/${index+1}`} className="content">
                     <div className="header">{planet.name}</div>
                     <div className="meta">
                         <span>Population {planet.population}</span>
@@ -18,7 +18,7 @@ const PlanetList = ({ planets, onPlanetSelect }) => {
         )
     })
 
-    return <div className="ui link five cards">{renderedList}</div>
+    return <div className="ui grid link three cards">{renderedList}</div>
 };
 
 export default PlanetList;
