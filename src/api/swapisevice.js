@@ -14,7 +14,7 @@ export default class SwapiService {
     }
 
     getPlanet = async (id) => {
-        const response = await this._swapiservice.get(`/planets/${id}`)
+        const response = await this._swapiservice.get(`/planets/${id}/`)
             .catch(response => response.data);
         return response.data;
     }
