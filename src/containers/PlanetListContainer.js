@@ -88,9 +88,9 @@ export default class PlanetListContainer extends React.Component {
 
         return (
             <div ref={this.containerRef}>
-                {spinner}
                 {errorNotification}
                 {contentLoaded}
+                {spinner}
             </div>
         )
     }
