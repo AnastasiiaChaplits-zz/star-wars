@@ -6,6 +6,7 @@ export default class SwapiService {
     });
 
 
+
     getPlanets = async (params = '') => {
         const response = await this._swapiservice.get(`/planets/${params}`)
             .catch(response => response.data);
@@ -22,5 +23,12 @@ export default class SwapiService {
         const response = await axios.get(url)
             .catch(response => response.data);
         return response.data;
+    }
+
+    getPlanetImage = async (id) => {
+        const response =  await axios.get(`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`)
+            .catch(response => response.data);
+        return response.config.url;
+        
     }
 }

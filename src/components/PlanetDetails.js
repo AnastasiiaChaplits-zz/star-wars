@@ -13,9 +13,22 @@ const PlanetDetails = (props) => {
         terrain,
         population,
         residents } = props.planet;
-        
-    return (
-        <div>
+    const { planetImg } = props;
+
+    const planetImageSegment = planetImg ? (
+        <div class="eight wide column">
+            <div className="ui inverted segment">
+                <div className=" ui fluid image">
+                    <img src={planetImg} alt={name}/>
+                </div>
+            </div>
+        </div>
+    ) : null;
+
+    const columnWide = planetImageSegment ? 'eight wide column' : 'thixtheen wide column';
+
+    const planetDetailsSegment = (
+        <div className={columnWide}>
             <div className="ui inverted segment">
                 <div className="ui inverted relaxed divided list">
                     <PlanetDetailsField name="Name: " description={name} />
@@ -27,14 +40,27 @@ const PlanetDetails = (props) => {
                     <PlanetDetailsField name="Population: " description={population} />
                 </div>
             </div>
-            <div className="ui inverted segment">
-                <div className="ui inverted relaxed divided list">
-                    {(residents.length > 0)
-                        ? <PlanetResidentsContainer residents={residents} />
-                        : <PlanetDetailsField name="Residents: " description="No one live here :("/>
-                    }
-                </div>
+        </div>
+    )
+
+    const planetResidentsSegment = (
+        <div className="ui inverted segment">
+            <div className="ui inverted relaxed divided list">
+                {(residents.length > 0)
+                    ? <PlanetResidentsContainer residents={residents} />
+                    : <PlanetDetailsField name="Residents: " description="No one live here :(" />
+                }
             </div>
+        </div>
+    )
+
+    return (
+        <div>
+            <div className="ui grid">
+                {planetImageSegment}
+                {planetDetailsSegment}
+            </div>
+            {planetResidentsSegment}
         </div>
     )
 }
