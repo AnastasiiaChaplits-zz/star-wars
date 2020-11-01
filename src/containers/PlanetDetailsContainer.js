@@ -8,7 +8,8 @@ import Spinner from '../components/Spinner';
 export default class PlanetDetailsContainer extends React.Component {
     state = {
         selectedPlanet: null,
-        error: false
+        error: false,
+        isLoading: false
     }
 
     componentDidMount() {
@@ -19,38 +20,46 @@ export default class PlanetDetailsContainer extends React.Component {
     swapiService = new SwapiService();
 
     onGetPlanet = (id) => {
+        this.setState({
+            isLoading: true
+        });
         this.swapiService
             .getPlanet(id)
             .then(this.onLoadedPlanetSuccess)
-            .catch(this.onError)
+            .catch(this.onError);
     }
 
     onLoadedPlanetSuccess = (selectedPlanet) => {
-        this.setState({ selectedPlanet, error: false })
+        this.setState({ 
+            selectedPlanet, 
+            error: false,
+            isLoading: false 
+        });
     }
 
 
     onError = () => {
         this.setState({
-            error: true
+            error: true,
+            isLoading: false
         })
     }
 
 
     render() {
-        const {selectedPlanet, error} = this.state;
+        const {selectedPlanet, error, isLoading} = this.state;
         console.log(this.state)
 
         const errorNotification = error ? <ErrorNotification /> : null;
         const contentLoaded = (!error && selectedPlanet) ? <PlanetDetails planet={selectedPlanet} /> : null;
-        const spinner = !selectedPlanet ? <Spinner /> : null;
+        const spinner = isLoading ? <Spinner /> : null;
 
         return (
-            <>
+            <div>
                 {spinner}
                 {errorNotification}
                 {contentLoaded}
-            </>
+            </div>
         )
     }
 }
