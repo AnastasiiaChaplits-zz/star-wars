@@ -8,8 +8,7 @@ import Spinner from '../components/Spinner';
 export default class PlanetDetailsContainer extends React.Component {
     state = {
         selectedPlanet: null,
-        error: false,
-        residents: null
+        error: false
     }
 
     componentDidMount() {
@@ -39,7 +38,8 @@ export default class PlanetDetailsContainer extends React.Component {
 
 
     render() {
-        const {selectedPlanet, error, residents} = this.state;
+        const {selectedPlanet, error} = this.state;
+        console.log(this.state)
 
         const errorNotification = error ? <ErrorNotification /> : null;
         const contentLoaded = (!error && selectedPlanet) ? <PlanetDetails planet={selectedPlanet} /> : null;

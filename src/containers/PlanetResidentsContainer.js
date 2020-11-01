@@ -15,14 +15,14 @@ export default class PlanetResidentsContainer extends React.Component {
         }
     }
 
-    swapiService = new SwapiService();
-
     componentDidMount() {
         const {residents} = this.props;
         residents.forEach(item => {
             this.onGetResident(item);
         })
     }
+
+    swapiService = new SwapiService();
 
     onGetResident = url => {
         this.swapiService
@@ -35,7 +35,8 @@ export default class PlanetResidentsContainer extends React.Component {
         this.setState(state => {
             const residents = [...state.residents, resident];
             return {
-                residents
+                residents,
+                error: false
             };
         })
     }

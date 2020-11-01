@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PlanetResidents = ({ residents }) => {
-    console.log(residents);
     const renderedList = residents.map((resident, index) => {
         return (
             <div className="ui card" key={index}>
