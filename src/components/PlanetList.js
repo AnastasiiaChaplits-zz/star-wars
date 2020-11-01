@@ -9,10 +9,10 @@ const PlanetList = ({ planets }) => {
                     <Link to={`/planet/${index + 1}`} className="content" style={{textDecoration: "none"}}>
                         <div className="center aligned header">{planet.name}</div>
                         <div className="center aligned meta">
-                            <span>Population {planet.population}</span>
+                            <span>Population: {planet.population}</span>
                         </div>
                         <div className="center aligned description">
-                            Climat {planet.climate}
+                            Climat: <b>{planet.climate}</b>
                         </div>
                     </Link>
                 </div>

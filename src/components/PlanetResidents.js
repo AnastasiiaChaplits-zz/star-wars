@@ -3,9 +3,9 @@ import React from 'react';
 const PlanetResidents = ({ residents }) => {
     const renderedList = residents.map((resident, index) => {
         return (
-            <div className="ui card" key={index}>
+            <div className="ui fluid grey card" key={index}>
                 <div className="content">
-                    <div className="header">{resident.name}</div>
+                    <div className="center aligned header">{resident.name}</div>
                 </div>
                 <div className="content">
                     <h4 className="ui sub header">About</h4>
@@ -43,7 +43,7 @@ const PlanetResidents = ({ residents }) => {
                 style={{ color: "white" }}>
                 Residents
             </div>
-            <div className="ui two cards">{renderedList}</div>
+            <div className="ui three centered cards">{renderedList}</div>
         </div>
     )
 }

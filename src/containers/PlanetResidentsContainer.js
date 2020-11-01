@@ -11,7 +11,8 @@ export default class PlanetResidentsContainer extends React.Component {
 
         this.state = {
             residents: [],
-            error: false
+            error: false,
+            isLoading: false
         }
     }
 
@@ -25,6 +26,9 @@ export default class PlanetResidentsContainer extends React.Component {
     swapiService = new SwapiService();
 
     onGetResident = url => {
+        this.setState({
+            isLoading: true
+        })
         this.swapiService
             .getResident(url)
             .then(this.onResidentLoaded)
@@ -36,21 +40,23 @@ export default class PlanetResidentsContainer extends React.Component {
             const residents = [...state.residents, resident];
             return {
                 residents,
-                error: false
+                error: false,
+                isLoading: false
             };
         })
     }
 
     onError = () => {
         this.setState({
-            error: true
+            error: true,
+            isLoading: false
         })
     }
 
     render() {
-        const {residents, error} = this.state;
+        const {residents, error, isLoading} = this.state;
 
-        const spinner = (residents.length === 0) ? <Spinner /> : null;
+        const spinner = isLoading ? <Spinner /> : null;
         const errorNotification = error ? <ErrorNotification /> : null;
         const contentLoaded = (!error) ? <PlanetResidents residents={residents} /> : null;
 

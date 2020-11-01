@@ -16,7 +16,7 @@ const PlanetDetails = (props) => {
     const { planetImg } = props;
 
     const planetImageSegment = planetImg ? (
-        <div class="eight wide column">
+        <div className="eight wide column">
             <div className="ui inverted segment">
                 <div className=" ui fluid image">
                     <img src={planetImg} alt={name}/>
