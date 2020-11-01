@@ -38,7 +38,7 @@ export default class PlanetDetailsContainer extends React.Component {
     }
 
 
-    onError = () => {
+    onError = (response) => {
         this.setState({
             error: true,
             isLoading: false
@@ -48,9 +48,9 @@ export default class PlanetDetailsContainer extends React.Component {
 
     render() {
         const {selectedPlanet, error, isLoading} = this.state;
-        console.log(this.state)
+        const errorMsg = `There is no planet with id ${this.props.match.params.id}.`;
 
-        const errorNotification = error ? <ErrorNotification /> : null;
+        const errorNotification = error ? <ErrorNotification errorMessage={errorMsg} /> : null;
         const contentLoaded = (!error && selectedPlanet) ? <PlanetDetails planet={selectedPlanet} /> : null;
         const spinner = isLoading ? <Spinner /> : null;
 

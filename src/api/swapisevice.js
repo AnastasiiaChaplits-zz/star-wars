@@ -8,22 +8,19 @@ export default class SwapiService {
 
     getPlanets = async (params = '') => {
         const response = await this._swapiservice.get(`/planets/${params}`)
-            .catch(response => response);
+            .catch(response => response.data);
         return response.data;
     }
 
     getPlanet = async (id) => {
         const response = await this._swapiservice.get(`/planets/${id}`)
-            .catch(response => response);
+            .catch(response => response.data);
         return response.data;
     }
 
     getResident = async (url) => {
         const response = await axios.get(url)
-            .catch(response => response);
-        if (!response.data) {
-            return response
-        }
+            .catch(response => response.data);
         return response.data;
     }
 }
