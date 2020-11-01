@@ -23,4 +23,13 @@ export default class SwapiService {
         }
         return response.data;
     }
+
+    getResident = async (url) => {
+        const response = await axios.get(url)
+            .catch(response => response);
+        if (!response.data) {
+            return response
+        }
+        return response.data;
+    }
 }
