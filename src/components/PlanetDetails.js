@@ -41,7 +41,7 @@ const PlanetDetails = (props) => {
                 </div>
             </div>
         </div>
-    )
+    );
 
     const planetResidentsSegment = (
         <div className="ui inverted segment">
@@ -52,7 +52,7 @@ const PlanetDetails = (props) => {
                 }
             </div>
         </div>
-    )
+    );
 
     return (
         <div>

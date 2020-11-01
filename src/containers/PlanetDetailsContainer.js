@@ -15,16 +15,17 @@ export default class PlanetDetailsContainer extends React.Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-        this.onGetPlanet(id);
-        this.onGetImage(id);
+        this.getPlanet(id);
+        this.getImage(id);
     };
 
     swapiService = new SwapiService();
 
-    onGetPlanet = (id) => {
+    getPlanet = (id) => {
         this.setState({
             isLoading: true
         });
+        
         this.swapiService
             .getPlanet(id)
             .then(this.onLoadedPlanetSuccess)
@@ -47,7 +48,7 @@ export default class PlanetDetailsContainer extends React.Component {
         });
     }
 
-    onGetImage = (id) => {
+    getImage = (id) => {
         this.setState({
             isLoading: true
         });

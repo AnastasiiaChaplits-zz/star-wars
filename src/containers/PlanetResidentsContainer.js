@@ -6,56 +6,46 @@ import Spinner from '../components/Spinner';
 import ErrorNotification from '../components/ErrorNotification'
 
 export default class PlanetResidentsContainer extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            residents: [],
-            error: false,
-            isLoading: false
-        }
+    state = {
+        residents: [],
+        error: false,
+        isLoading: false
     }
 
     componentDidMount() {
-        const {residents} = this.props;
-        residents.forEach(item => {
-            this.onGetResident(item);
-        })
+        this.getResidents(this.props.residents);
     }
 
     swapiService = new SwapiService();
 
-    onGetResident = url => {
-        console.log(url)
+    getResidents = urls => {
         this.setState({
             isLoading: true
-        })
-        this.swapiService
-            .getResident(url)
-            .then(this.onResidentLoaded)
-            .catch(this.onError)
+        });
+        const residentRequests = urls.map(url => this.swapiService.getResident(url));
+        
+        Promise.all(residentRequests)
+            .then(this.onResidentsLoaded)
+            .catch(this.onError);
     }
 
-    onResidentLoaded = (resident) => {
-        this.setState(state => {
-            const residents = [...state.residents, resident];
-            return {
-                residents,
-                error: false,
-                isLoading: false
-            };
-        })
+    onResidentsLoaded = (residents) => {
+        this.setState({
+            residents,
+            error: false,
+            isLoading: false
+        });
     }
 
     onError = () => {
         this.setState({
             error: true,
             isLoading: false
-        })
+        });
     }
 
     render() {
-        const {residents, error, isLoading} = this.state;
+        const { residents, error, isLoading } = this.state;
 
         const spinner = isLoading ? <Spinner /> : null;
         const errorNotification = error ? <ErrorNotification /> : null;

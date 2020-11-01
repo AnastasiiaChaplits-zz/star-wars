@@ -24,7 +24,7 @@ export default class PlanetListContainer extends React.Component {
     swapiService = new SwapiService();
 
     componentDidMount() {
-        this.onGetPlanets();
+        this.getPlanets();
 
         window.addEventListener('scroll', this.handleScroll, { passive: true });
     }
@@ -44,11 +44,11 @@ export default class PlanetListContainer extends React.Component {
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
         if (!hasNoHeight && bottomWithGapPosition <= windowHeight) {
-            this.onGetPlanets()
+            this.getPlanets()
         }
     }
 
-    onGetPlanets() {
+    getPlanets() {
         this.setState({
             isLoading: true
         });
@@ -56,7 +56,7 @@ export default class PlanetListContainer extends React.Component {
         this.swapiService
             .getPlanets(`?page=${this.state.nextPage}`)
             .then(this.onLoadedPlanetsSucccess)
-            .catch(this.onError)
+            .catch(this.onError);
     }
 
     onLoadedPlanetsSucccess = (data) => {

@@ -18,7 +18,8 @@ const PlanetList = ({ planets }) => {
                 </div>
             </div>
         )
-    })
+    });
+
     return (
         <div className="ui three column grid link cards">
             {renderedList}

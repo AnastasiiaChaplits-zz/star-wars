@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ErrorNotification = ({
-    errorMessage = "URL address is incorrect. Please, go to the main page and try again"
+    errorMessage = "URL address is incorrect. Please, go to the main page and try again."
 }) => {
     return (
         <div className="ui negative message">
