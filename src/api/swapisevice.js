@@ -1,11 +1,19 @@
 import axios from 'axios';
 
+const replaceApiProtocol = (request) => ({
+    ...request,
+    // would be better to change in API
+    url: request.url.replace('http://', 'https://')
+});
+
+axios.interceptors.request.use(
+    request => replaceApiProtocol(request)
+);
+
 export default class SwapiService {
     _swapiservice = axios.create({
         baseURL: 'https://swapi.dev/api/'
     });
-
-
 
     getPlanets = async (params = '') => {
         const response = await this._swapiservice.get(`/planets/${params}`)

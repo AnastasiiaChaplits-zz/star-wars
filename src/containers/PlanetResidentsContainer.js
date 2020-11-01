@@ -26,6 +26,7 @@ export default class PlanetResidentsContainer extends React.Component {
     swapiService = new SwapiService();
 
     onGetResident = url => {
+        console.log(url)
         this.setState({
             isLoading: true
         })
