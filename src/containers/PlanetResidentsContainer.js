@@ -53,9 +53,9 @@ export default class PlanetResidentsContainer extends React.Component {
 
         return (
             <div>
+                {contentLoaded}
                 {spinner}
                 {errorNotification}
-                {contentLoaded}
             </div>
         )
     }

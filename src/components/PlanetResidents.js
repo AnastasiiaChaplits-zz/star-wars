@@ -43,6 +43,7 @@ const PlanetResidents = ({ residents }) => {
                 style={{ color: "white" }}>
                 Residents
             </div>
+            <br/>
             <div className="ui three centered cards">{renderedList}</div>
         </div>
     )
